@@ -71,15 +71,5 @@
 * Funcția primește diverse comenzi pe care le parsează sau le transformă pentru a apela funcțiile principale ale programului, în urma cărora se realizează operații precum inițializarea memoriei(INIT_HEAP), diagnosticarea memoriei(DUMP_MEMORY), alocarea de memorie(MALLOC), eliberarea memoriei(FREE), scrierea în memorie(WRITE) sau citirea din memorie(READ).
 
 
-## Comentarii asupra temei:
-
-### Ce ai învățat din realizarea acestei teme?
-
-* Cum funcționează memoria în background și cum se realizează anumite operații asupra memoriei
-
-* Să realizez o mai bună înțelegere a unei structuri de date(*Segregated Free Lists*)
-
-* Să înțeleg și să implementez mai bine un resizeable array.
-
 
 
