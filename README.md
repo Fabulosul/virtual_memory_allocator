@@ -1,12 +1,11 @@
 **Tudor Robert-Fabian**
-**312CAa**
 **Anul 2023-2024**
 
-## Segregated Free Lists - Tema 1
+## Segregated Free Lists
 
 ### Descriere:
 
-* Tema își propune dezvoltarea unui alocator de memorie folosind o structură de date denumită "Segregated Free Lists". Această structură e reprezentată de un vector de liste dublu înlănțuite, fiecare listă gestionând blocuri de memorie de aceeași dimensiune. Scopul alocatorului de memorie este să ofere diverse funcționalități precum: alocare, eliberare, citire, scriere a memoriei în funcție de comenzile primite.
+* Proiectul își propune dezvoltarea unui alocator de memorie folosind o structură de date denumită "Segregated Free Lists". Această structură e reprezentată de un vector de liste dublu înlănțuite, fiecare listă gestionând blocuri de memorie de aceeași dimensiune. Scopul alocatorului de memorie este să ofere diverse funcționalități precum: alocare, eliberare, citire, scriere a memoriei în funcție de comenzile primite.
 
 * Pentru alocarea memoriei, comanda MALLOC este urmată de numărul de octeți pe care dorim să îi alocăm. Alocatorul caută în vectorul de liste un bloc de memorie disponibil de dimensiune corespunzătoare sau, dacă nu găsește, poate fragmenta blocuri mai mari pentru a îndeplini comanda.
 
