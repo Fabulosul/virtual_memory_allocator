@@ -1,18 +1,51 @@
-#Copyright Tudor Robert-Fabian 312CAa 2023-2024                                 
-# compiler setup                                                                
-CC=gcc
-CFLAGS=-Wall -Wextra -std=c99
+# Compiler and flags
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g
 
-# define targets                                                                
-TARGETS = sfl
+# Output executable
+TARGET = sfl
 
-build: sfl.c
-	$(CC) $(CFLAGS) sfl.c -o sfl 
+# Source files
+SRCS = destroy_heap.c \
+       dump_memory.c \
+       free_functions.c \
+       generic_list_functions.c \
+       helper_functions.c \
+       init_heap.c \
+       malloc.c \
+       read.c \
+       write.c \
+	   sfl.c
 
-run_sfl: $(TARGETS) 
-	./sfl
+# Header files (optional: for dependencies)
+HEADERS = destroy_heap.h \
+          dump_memory.h \
+          free_functions.h \
+          generic_list_functions.h \
+          helper_functions.h \
+          init_heap.h \
+          malloc.h \
+          read.h \
+          structs.h \
+          write.h
 
+# Object files
+OBJS = $(SRCS:.c=.o)
+
+# Default target
+all: $(TARGET)
+
+# Build the executable
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# Rule for compiling source files
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean build artifacts
 clean:
-	rm -f $(TARGETS) *.o
+	rm -f $(OBJS) $(TARGET)
 
-.PHONY: pack clean
+# Phony targets
+.PHONY: all clean

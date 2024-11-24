@@ -15,13 +15,13 @@
 
 * O altă funcție ce trebuie implementată este afișarea stării actuale a memoriei (DUMP_MEMORY)/
 
-* Tema presupune totodată și gestionarea atentă a erorilor, cum ar fi lipsa de memorie (Out of memory) sau accesul la zone de memorie nealocate (Segmentation fault).
+* Proiectul presupune totodată și gestionarea atentă a erorilor, cum ar fi lipsa de memorie (Out of memory) sau accesul la zone de memorie nealocate (Segmentation fault).
 
 
 ## Explicații:
 
 ### init_heap
-* Funcția alocă memorie pentru vectorul de liste dublu înlănțuite denumită în enunțul temei "Segregated Free Lists". Ea primește adresa de început a zonei de memorie, numărul de liste din vector și dimensiunea fiecărei liste. De asemenea, aceasta inițializează vectorul de liste, precum și blocurile de memorie corespunzătoare pentru fiecare listă, utilizând apeluri către funcția "dll_allocate_nth_node". La final, funcția returnează vectorul de liste.
+* Funcția alocă memorie pentru vectorul de liste dublu înlănțuite denumită în enunțul proiectului "Segregated Free Lists". Ea primește adresa de început a zonei de memorie, numărul de liste din vector și dimensiunea fiecărei liste. De asemenea, aceasta inițializează vectorul de liste, precum și blocurile de memorie corespunzătoare pentru fiecare listă, utilizând apeluri către funcția "dll_allocate_nth_node". La final, funcția returnează vectorul de liste.
 
 
 ### dump_memory
@@ -69,6 +69,16 @@
 
 * Funcția primește diverse comenzi pe care le parsează sau le transformă pentru a apela funcțiile principale ale programului, în urma cărora se realizează operații precum inițializarea memoriei(INIT_HEAP), diagnosticarea memoriei(DUMP_MEMORY), alocarea de memorie(MALLOC), eliberarea memoriei(FREE), scrierea în memorie(WRITE) sau citirea din memorie(READ).
 
+
+## Comentarii asupra proiectului:
+
+### Ce ai învățat din realizarea acestui proiect?
+
+* Cum funcționează memoria în background și cum se realizează anumite operații asupra memoriei
+
+* Să realizez o mai bună înțelegere a unei structuri de date(*Segregated Free Lists*)
+
+* Să înțeleg și să implementez mai bine un resizeable array.
 
 
 
