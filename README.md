@@ -1,84 +1,84 @@
-**Tudor Robert-Fabian**
-**Anul 2023-2024**
+**Tudor Robert-Fabian**  
+**Year 2023-2024**  
 
-## Segregated Free Lists
+## Segregated Free Lists  
 
-### Descriere:
+### Description:  
 
-* Proiectul își propune dezvoltarea unui alocator de memorie folosind o structură de date denumită "Segregated Free Lists". Această structură e reprezentată de un vector de liste dublu înlănțuite, fiecare listă gestionând blocuri de memorie de aceeași dimensiune. Scopul alocatorului de memorie este să ofere diverse funcționalități precum: alocare, eliberare, citire, scriere a memoriei în funcție de comenzile primite.
+* The project aims to develop a memory allocator using a data structure called "Segregated Free Lists." This structure is represented by an array of doubly linked lists, with each list managing memory blocks of the same size. The purpose of the memory allocator is to provide various functionalities such as allocation, deallocation, reading, and writing memory based on received commands.  
 
-* Pentru alocarea memoriei, comanda MALLOC este urmată de numărul de octeți pe care dorim să îi alocăm. Alocatorul caută în vectorul de liste un bloc de memorie disponibil de dimensiune corespunzătoare sau, dacă nu găsește, poate fragmenta blocuri mai mari pentru a îndeplini comanda.
+* For memory allocation, the **MALLOC** command is followed by the number of bytes we want to allocate. The allocator searches the array of lists for an available memory block of the appropriate size. If none is found, it may split larger blocks to fulfill the request.  
 
-* Eliberarea memoriei este realizată prin comanda FREE, care primește adresa de început a blocului de memorie ce trebuie eliberat. Acest bloc este marcat ca fiind liber și reintrodus în vectorul de liste.
+* Memory deallocation is performed using the **FREE** command, which receives the starting address of the memory block to be freed. This block is marked as free and reinserted into the array of lists.  
 
-* Operațiile disponibile sunt cele de citire (READ) și scriere (WRITE) și permit accesarea și modificarea conținutului memoriei de la o anumită adresă și pe o anumită lungime.
+* Available operations include **READ** and **WRITE**, which allow accessing and modifying memory content at a specific address for a specified length.  
 
-* O altă funcție ce trebuie implementată este afișarea stării actuale a memoriei (DUMP_MEMORY)/
+* Another function that needs to be implemented is displaying the current memory state (**DUMP_MEMORY**).  
 
-* Proiectul presupune totodată și gestionarea atentă a erorilor, cum ar fi lipsa de memorie (Out of memory) sau accesul la zone de memorie nealocate (Segmentation fault).
+* The project also involves careful error management, such as handling out-of-memory situations and preventing access to unallocated memory (Segmentation fault).  
 
+## Explanations:  
 
-## Explicații:
+### init_heap  
 
-### init_heap
-* Funcția alocă memorie pentru vectorul de liste dublu înlănțuite denumită în enunțul proiectului "Segregated Free Lists". Ea primește adresa de început a zonei de memorie, numărul de liste din vector și dimensiunea fiecărei liste. De asemenea, aceasta inițializează vectorul de liste, precum și blocurile de memorie corespunzătoare pentru fiecare listă, utilizând apeluri către funcția "dll_allocate_nth_node". La final, funcția returnează vectorul de liste.
+* The function allocates memory for the array of doubly linked lists referred to in the project as "Segregated Free Lists." It receives the starting address of the memory area, the number of lists in the array, and the size of each list. Additionally, it initializes the array of lists and the corresponding memory blocks for each list using calls to the **dll_allocate_nth_node** function. Finally, the function returns the array of lists.  
 
+### dump_memory  
 
-### dump_memory
+* The function displays information about the current state of allocated and unallocated memory, as well as the used and available memory blocks.  
 
-* Funcția afișează informații despre starea actuală a memoriei alocate și nealocate, precum și despre blocurile de memorie utilizate și disponibile.
+### my_malloc  
 
+* The function starts by checking whether there is enough space in the array of lists for the requested allocation. This verification involves traversing each list in the array to determine if an available block of sufficient size exists.  
 
-### my_malloc
+* If a suitable space is found, the function removes a node from the corresponding list and uses this memory block to create a new allocated block, updating its information accordingly.  
 
-* Funcția începe prin a verifica dacă avem sufiecient spațiu pentru alocarea cerută în vectorul de liste. Această verificare presupune parcurgerea fiecărei liste din vector pentru a determina dacă există o listă disponibilă de dimensiune suficient de mare.
+* If, after the requested allocation, some space remains unused, the function reintroduces this remaining block into the array of lists.  
 
-* Dacă un spațiu corespunzător este găsit, funcția înlătură un nod din lista corespunzătoare și utilizează acest bloc de memorie pentru a crea un nou bloc alocat cu informațiile celui vechi actualizate pentru dimensiunea lui.
+* To perform these operations, the function uses two auxiliary functions: **insert_node_ordonated_vector** and **insert_element_ordonated_allocated_blocks**. These auxiliary functions are responsible for inserting nodes and memory blocks in an ordered manner into their respective data structures.  
 
-* În situația în care în urma alocării cerute rămâne spațiu nealocat în acel bloc, funcția îl reintroduce în vectorul de liste.
+### my_free - *(reconstruction type 0)*  
 
-* Pentru a realiza aceste operațiuni funcția utilizează alte două funcții auxiliare: "insert_node_ordonated_vector" și "insert_element_ordonated_allocated_blocks". Aceste funcții auxiliare sunt responsabile de inserarea ordonată a nodurilor și a blocurilor de memorie în structurile de date corespunzătoare.
+* The function traverses the list of allocated blocks to locate the block containing the specified address. If the address corresponds to the start of a node in the array of lists, the function removes the block from the allocated list, and its occupied memory is marked as free. Additionally, it creates a new block of the same size as the freed one.  
 
+* If the block’s size already exists in the array, the function inserts it into the corresponding list. Otherwise, the array is resized, and a new list is created for the block size, where it is then added.  
 
-### my_free - *(tip reconstituire 0)*
+### my_free_1 - *(reconstruction type 1)*  
 
-* Funcția parcurge lista de blocuri alocate pentru a localiza blocul care conține adresa specificată. Dacă adresa reprezintă începutul unui nod din vectorul de liste, ea înlătură blocul din lista de blocuri alocate, iar spațiul de memorie pe care l-a ocupat este marcat ca fiind eliberat. De asemenea, creează un nou bloc de dimensiunea celui eliberat, iar dacă blocul acesta are o dimensiune deja existentă în vector, funcția introduce blocul în lista corespunzătoare dimensiunii lui. În caz contrar, vectorul este redimensionea și se creează o listă nouă de dimensiunea blocului, în care îl adăugăm.
+* The function traverses the list of allocated blocks to locate the block containing the specified address. If the address corresponds to the start of a node in the array of lists, the function removes the block from the allocated list, and its occupied memory is marked as free. Additionally, the function creates a new block of the same size as the removed one (**new_node**).  
 
+* The function then searches the array for blocks that have the same index as the freed block and are adjacent to it (either on the left, right, or both).  
 
-### my_free_1 - *(tip reconstituire 1)*
+* If no adjacent blocks are found, **new_node** is inserted into the list in order based on size and address. If one or two adjacent blocks exist, a new node (**merged_node**) is initialized by merging **new_node** with the adjacent block(s). **new_node** is then deallocated, and **merged_node** is inserted into the array based on its new size and address.  
 
-* Funcția parcurge lista de blocuri alocate pentru a localiza blocul care conține adresa specificată. Dacă adresa reprezintă începutul unui nod din vectorul de liste, ea înlătură blocul din lista de blocuri alocate, iar spațiul de memorie pe care l-a ocupat este marcat ca fiind eliberat. De asemenea, funcția creează un nou bloc de dimensiunea celui eliminat(new_node). Apoi, funcția realizează o căutare în vector a unor blocuri ce au același index ca al blocului eliberat și totodată adrese consecutive acestuia(la stânga, la dreapta sau ambele). Dacă nu găsește niciun bloc lateral, inserează new_node în listă după dimensiune și adresă. Dacă în schimb găsește un unul sau două blocuri laterale inițializează un nod nou(merged_node) ce însumează new_node împreună cu cel/cele lateral/laterale. În final new_node este dezalocat, iar merged_node este introdus în vector pe baza noii sale dimensiuni și adrese.
+### destroy_heap  
 
+* This function is responsible for freeing all allocated resources and terminating the program. It traverses the node lists in the array and the allocated block list, freeing all allocated memory.  
 
-### destroy_heap
+### write  
 
-* Funcția este responsabilă pentru eliberarea tuturor resurselor alocate și încheierea programului. Ea parcurge listele de noduri din vector și lista de blocuri alocate și eliberează memoria alocată pentru acestea de-a lungul rulării programului.
+* The function handles writing a specified number of bytes at a given address in the allocated memory list. It traverses the allocated memory blocks to check whether the specified address falls within one of them.  
 
+* If there are not enough allocated bytes from the given address onward, the function displays an error message and calls **dump_memory**. If a block containing the address and sufficient memory is found, the function performs the write operation at that address.  
 
-### write
+### read  
 
-* Funcția se ocupă de scrierea unui număr specificat de bytes la o anumită adresă în lista de noduri alocate. Ea parcurge blocurile de memorie alocate pentru a verifica dacă adresa specificată se află într-unul dintre acestea. În cazul în care nu există suficienți bytes alocați de la adresa dată în continuare, funcția afișează un mesaj de eroare și apealează dump_memory.Dacă găsește în schimb un bloc care conține adresa și memorie suficientă, funcția efectuează scrierea la această adresă.
+* The function handles reading a specified number of bytes from a given address in the allocated memory list. It traverses the allocated memory blocks to check whether the specified address falls within one of them.  
 
+* If the message to be written is smaller than **nr_bytes**, only the available bytes are written.  
 
-### read
+* If there are not enough allocated bytes from the given address onward, the function displays an error message and calls **dump_memory**. If a block containing the address and sufficient memory is found, the function reads **nr_bytes** from that address.  
 
-* Funcția se ocupă de citirea unui număr specificat de bytes la o anumită adresă în lista de noduri alocate. Ea parcurge blocurile de memorie alocate pentru a verifica dacă adresa specificată se află într-unul dintre acestea. Dacă mesajul pe care vrem să îl scriem are dimensiunea mai mică decât nr_bytes, scriem doar atâția bytes cât are mesajul. În cazul în care nu există suficienți bytes alocați de la adresa dată în continuare, funcția afișează un mesaj de eroare și apelează dump_memory. Dacă găsește în schimb un bloc care conține adresa și memorie suficientă, funcția efectuează citirea a nr_bytes de la această adresă.
+### main  
 
+* The function processes various commands, parsing or transforming them to call the main functions of the program. These operations include memory initialization (**INIT_HEAP**), memory diagnostics (**DUMP_MEMORY**), memory allocation (**MALLOC**), memory deallocation (**FREE**), writing to memory (**WRITE**), and reading from memory (**READ**).  
 
-### main
+## Comments on the Project:  
 
-* Funcția primește diverse comenzi pe care le parsează sau le transformă pentru a apela funcțiile principale ale programului, în urma cărora se realizează operații precum inițializarea memoriei(INIT_HEAP), diagnosticarea memoriei(DUMP_MEMORY), alocarea de memorie(MALLOC), eliberarea memoriei(FREE), scrierea în memorie(WRITE) sau citirea din memorie(READ).
+### What did you learn from completing this project?  
 
+* How memory works in the background and how certain memory operations are performed.  
 
-## Comentarii asupra proiectului:
+* A better understanding of a data structure (*Segregated Free Lists*).  
 
-### Ce ai învățat din realizarea acestui proiect?
-
-* Cum funcționează memoria în background și cum se realizează anumite operații asupra memoriei
-
-* Să realizez o mai bună înțelegere a unei structuri de date(*Segregated Free Lists*)
-
-* Să înțeleg și să implementez mai bine un resizeable array.
-
-
-
+* How to better understand and implement a **resizable array**.  
