@@ -72,13 +72,3 @@
 ### main  
 
 * The function processes various commands, parsing or transforming them to call the main functions of the program. These operations include memory initialization (**INIT_HEAP**), memory diagnostics (**DUMP_MEMORY**), memory allocation (**MALLOC**), memory deallocation (**FREE**), writing to memory (**WRITE**), and reading from memory (**READ**).  
-
-## Comments on the Project:  
-
-### What did you learn from completing this project?  
-
-* How memory works in the background and how certain memory operations are performed.  
-
-* A better understanding of a data structure (*Segregated Free Lists*).  
-
-* How to better understand and implement a **resizable array**.  
