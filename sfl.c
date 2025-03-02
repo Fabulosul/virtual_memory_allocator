@@ -5,15 +5,15 @@
 #include <math.h>
 
 #include "structs.h"
-#include "generic_list_functions.h"
-#include "init_heap.h"
-#include "destroy_heap.h"
-#include "malloc.h"
-#include "free_functions.h"
-#include "write.h"
-#include "read.h"
-#include "helper_functions.h"
-#include "dump_memory.h"
+#include "generic_list_functions/generic_list_functions.h"
+#include "init_heap/init_heap.h"
+#include "destroy_heap/destroy_heap.h"
+#include "malloc/malloc.h"
+#include "free_functions/free_functions.h"
+#include "write/write.h"
+#include "read/read.h"
+#include "helper_functions/helper_functions.h"
+#include "dump_memory/dump_memory.h"
 
 
 // În main apelăm funcția corespunzătoare după comanda primită.

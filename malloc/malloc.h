@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "structs.h"
+#include "../structs.h"
 
 void remaining_space_case_malloc(linked_list_t ***vector_ptr,
                                  memory_management *memory_info,

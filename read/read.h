@@ -1,7 +1,7 @@
 #ifndef READ_H
 #define READ_H
 
-#include "structs.h"
+#include "../structs.h"
 
 
 // Funcție care citește din memorie

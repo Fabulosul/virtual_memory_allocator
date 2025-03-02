@@ -1,7 +1,7 @@
 #ifndef HELPER_FUNCTIONS_H
 #define HELPER_FUNCTIONS_H
 
-#include "structs.h"
+#include "../structs.h"
 
 block_info *remove_node_block_info(memory_management *memory_info, block_info *current_node);
 

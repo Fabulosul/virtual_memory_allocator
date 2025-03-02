@@ -1,6 +1,6 @@
 #include "malloc.h"
-#include "helper_functions.h"
-#include "generic_list_functions.h"
+#include "../helper_functions/helper_functions.h"
+#include "../generic_list_functions/generic_list_functions.h"
 
 // Funție care tratează cazul care în urma alocării de memorie
 // ne rămâne fragment din nodul inițial și trebuie

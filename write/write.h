@@ -2,7 +2,7 @@
 #define WRITE_H
 
 
-#include "structs.h"
+#include "../structs.h"
 
 
 // Function prototype

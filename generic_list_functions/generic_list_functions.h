@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "structs.h"
+#include "../structs.h"
 
 
 dll_node_t *dll_allocate_nth_node(linked_list_t *list, unsigned int nr, int current_address, int index);

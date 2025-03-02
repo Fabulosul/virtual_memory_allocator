@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "structs.h"
+#include "../structs.h"
 
 // Funcție care distruge heap-ul și eliberează memoria alocată
 void destroy_heap(linked_list_t ***vector_ptr, memory_management **memory_info_ptr);

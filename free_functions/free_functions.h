@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "generic_list_functions.h"
-#include "structs.h"
+#include "../generic_list_functions/generic_list_functions.h"
+#include "../structs.h"
 
 void free_no_index_in_list_case(dll_node_t *new_node, int size,
                                 memory_management *memory_info,

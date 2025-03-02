@@ -1,14 +1,10 @@
-#include "write.h"
-#include "dump_memory.h"
+#include "read.h"
+#include "../dump_memory/dump_memory.h"
 
-// Funcție care scrie nr_bytes la address în memoria alocată
-void write(int address, char data_parsed[], int nr_bytes,
-		   memory_management *memory_info, linked_list_t **vector)
+// Funcție care citește nr_bytes de la address din memoria alocată
+void read(int address, int nr_bytes, memory_management *memory_info,
+		  linked_list_t **vector)
 {
-	char *data_ptr = data_parsed;
-	int length = strlen(data_parsed);
-	if (length < nr_bytes)
-		nr_bytes = length;
 	block_info *current_node = memory_info->allocated_blocks;
 	int ok = 0;
 	for (unsigned int i = 0; i < memory_info->nr_allocated_blocks; i++) {
@@ -30,13 +26,15 @@ void write(int address, char data_parsed[], int nr_bytes,
 		((dll_block_data *)current_node->data)->address +
 		((dll_block_data *)current_node->data)->size;
 		if (remaining_bytes <= 0) {
-			memcpy(((dll_block_data *)current_node->data)->value +
-				   difference, data_ptr, nr_bytes);
+			for (int i = 0; i < nr_bytes; i++)
+				printf("%c", *((char *)(((dll_block_data *)
+					   (current_node->data))->value + difference + i)));
+			printf("\n");
 			return;
 		}
-		memcpy(((dll_block_data *)current_node->data)->value +
-			   difference, data_ptr, remaining_size_first_block);
-		data_ptr = data_ptr + remaining_size_first_block;
+		for (int i = 0; i < remaining_size_first_block; i++)
+			printf("%c", *((char *)(((dll_block_data *)
+					(current_node->data))->value + difference + i)));
 		current_node = current_node->next;
 		while (nr_bytes != 0 && current_node) {
 			if (current_address !=
@@ -47,16 +45,19 @@ void write(int address, char data_parsed[], int nr_bytes,
 			}
 			remaining_bytes -= ((dll_block_data *)current_node->data)->size;
 			if (remaining_bytes <= 0) {
-				memcpy(((dll_block_data *)current_node->data)->value, data_ptr,
-					   remaining_bytes +
-					   ((dll_block_data *)current_node->data)->size);
+				for (int i = 0; i < remaining_bytes +
+					 ((dll_block_data *)current_node->data)->size; i++)
+					printf("%c", *((char *)(((dll_block_data *)
+						   current_node->data)->value + i)));
+				printf("\n");
 				return;
 			}
-			memcpy(((dll_block_data *)current_node->data)->value, data_ptr,
-				   ((dll_block_data *)current_node->data)->size);
-			data_ptr = data_ptr +
-			((dll_block_data *)current_node->data)->size;
-			current_address = ((dll_block_data *)current_node->data)->address +
+			for (int i = 0; i < ((dll_block_data *)current_node->data)->size;
+				 i++)
+				printf("%c", *((char *)(((dll_block_data *)
+					   (current_node->data))->value + i)));
+			current_address =
+			((dll_block_data *)current_node->data)->address +
 			((dll_block_data *)current_node->data)->size;
 			current_node = current_node->next;
 		}
@@ -64,6 +65,7 @@ void write(int address, char data_parsed[], int nr_bytes,
 			printf("Segmentation fault (core dumped)\n");
 			dump_memory(vector, memory_info);
 		}
+		printf("\n");
 	} else {
 		printf("Segmentation fault (core dumped)\n");
 		dump_memory(vector, memory_info);

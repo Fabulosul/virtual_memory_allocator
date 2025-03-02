@@ -1,5 +1,5 @@
-#include "init_heap.h"
-#include "generic_list_functions.h"
+#include "../init_heap/init_heap.h"
+#include "../generic_list_functions/generic_list_functions.h"
 
 // Funcție care alocă memorie pentru vectorul de liste dublu înlănțuite
 linked_list_t **init_heap(int start_address, unsigned int nr_lists,

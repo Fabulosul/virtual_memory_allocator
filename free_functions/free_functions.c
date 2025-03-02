@@ -1,5 +1,5 @@
-#include "free_functions.h"
-#include "helper_functions.h"
+#include "../free_functions/free_functions.h"
+#include "../helper_functions/helper_functions.h"
 
 // Funcție care tratează cazul în care se elibereză un nod
 // și nu găsim un nod cu același index în listă și
